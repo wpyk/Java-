@@ -37,8 +37,10 @@ JavaBean是特殊化的pojo，当pojo按照一定的约束规则创建时，就�
 
 首先要明白java.lang.Integer是什么，它是Integer这个class的全地址。
 在每一个java class的文件中，最开始的地方需要import package。通过import，在当前的项目中就可以使用被引用的package里的class。举例说明，假如我在com.wpyk 这个package中创建了People类，想要在位于com.wxk这个package中的Teacher类中使用People类，就可以 import com.wpyk.People，然后就能够直接 People p = new People（）。如果在最初没有import，则上述的语句要变为： com.wpyk.People p = new com.wpyk.People()。  
+在Mybatis中，官方定义了别名，xml文件中可以不使用权名称，直接使用int也能够识别。
 但是要注意，在以下情况时必须使用全地址：   
 
 1. 当某一个类名出现在两个package中。举例说明： import com.wpyk.People， import com.wxk.People，那在新创建People对象的时候，到底用的是import的哪一个类呢？此时需要通过全地址来区分；
 2. 如上文分析中提到的，没有import的时候；
 3. 在无法import的文件，如xml中。
+
