@@ -53,8 +53,22 @@ commit命令时将位于暂存区/缓存区/index/目录区 的文件添加到�
 查看commit的历史记录，在这里能看到单个commit的MD5值
 ### git show md5 
 查看该md5对应的commit的改动明细
+### git reflog
+查看所有的commit操作，包括被git reset --hard了的命令。  
+举例来说，加入现在处于developer分支上，进行了commit c4，但是这个commit被reset回了commit c3。这个时候使用git log是无法看到commit c4的，但是reflog可以，差别见下图：  
+![git log git reflog.png](https://i.loli.net/2020/01/02/DHymxgVCWvTKQbr.png)  
+此时的source tree的状态为：  
+![source tree1.png](https://i.loli.net/2020/01/02/6dbW3RpuwTQCieN.png)  
+如果找到commit c4的id， 并且执行git reset，再查看git log就能看到commit c4的信息了。 
+![git log git reflog2.png](https://i.loli.net/2020/01/02/tD86bvsxgPwSQ7T.png)  
+![source tree2.png](https://i.loli.net/2020/01/02/5B4yIROP62heLsH.png)
+
 
 ## 改
+**修改commit的message**
+###git commit --amend
+
+**撤销commit**
 假设现在有一个交master2.markdown 的文件，创建后commit了一次；    
 ![2.png](https://i.loli.net/2020/01/01/SMK5Qxsmr1ZoIfV.png)
 然后再未push的情况下，进行了修改，然后又commit了一次：  
@@ -141,4 +155,25 @@ commit命令时将位于暂存区/缓存区/index/目录区 的文件添加到�
 ![merge a certain file from another branch.png](https://i.loli.net/2020/01/01/Z6XYHK8WdvqIROu.png)
 
 
+**fast forward merge 和 --no-ff 的区别**
 
+假设我们现在处于developer分支上的commit c4，从commit c4时分出去一个t1的分支，然后做了commit c5和commit c6.  
+![t1 before merge.png](https://i.loli.net/2020/01/02/834hceToG5iYJxj.png)  
+这时我们想把t1合并到developer上，有两种操作，这两种操作分别会使得source tree有不同的效果：  
+### git merge t1
+![developer fast forward merge with t1.png](https://i.loli.net/2020/01/02/hVbePmXLvzsqW5B.png)
+### git merge --no-ff t1  
+![developer no fast forward merge with t1.png](https://i.loli.net/2020/01/02/RweElvt15fzdpq8.png)
+显然，后一种做法能够更明确的表现出项目在推进过程中的每一次修改变化
+
+假设从developer 位于commit c4时分出了两个分支t1和t2，并且t1进行了commit c5和commit c6.通过git merge --no-ff t1  将t1合并到developer了。随后分出t3，进行commit c8并且也同样合并了。  
+t2进行的修改commit c7这时该如何做呢？
+![before rebase.png](https://i.loli.net/2020/01/02/pu2MF4sJKfLA5q1.png) 
+此时为了使t2能够将内容更新的与developer分支一样，我们使用rebase（变基）操作：  
+![git rebase.png](https://i.loli.net/2020/01/02/u8OzsdBI7iHEqTr.png)  
+此时打开t2位置的commit的文档，里面会出现t2位置与developer位置文档中的变化，根据需要进行更新，然后执行：  
+![git rebase2.png](https://i.loli.net/2020/01/02/uhJ3PeDoiR7IQCc.png)  
+此时，再打开source tree，变化为：  
+![after rebase.png](https://i.loli.net/2020/01/02/JTnL6ji8eybfPFS.png)  
+然后我们再checkout到developer，合并t2：    
+![merge t2](https://imgchr.com/i/lNym0U)
