@@ -176,4 +176,4 @@ t2进行的修改commit c7这时该如何做呢？
 此时，再打开source tree，变化为：  
 ![after rebase.png](https://i.loli.net/2020/01/02/JTnL6ji8eybfPFS.png)  
 然后我们再checkout到developer，合并t2：    
-![merge t2](https://imgchr.com/i/lNym0U)
+![merge t2](https://s2.ax1x.com/2020/01/02/lNym0U.png))
