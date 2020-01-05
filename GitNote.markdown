@@ -50,7 +50,9 @@ commit命令时将位于暂存区/缓存区/index/目录区 的文件添加到�
 
 ##查  
 ### git log  
-查看commit的历史记录，在这里能看到单个commit的MD5值
+查看commit的历史记录，在这里能看到单个commit的MD5值，注意，log查看的是commit记录。
+### git reflog
+查看的是操作记录，假设执行了c1，c2,c3的commit，此时head指向c3.然后通过reset将head指向c1了。这时如果执行的是log的话，只能看到c1，但是如果执行了reflog，三次commit都是可以看到的。commit记录和操作记录不相等，要好好理解。
 ### git show md5 
 查看该md5对应的commit的改动明细
 ### git reflog
@@ -125,10 +127,14 @@ commit命令时将位于暂存区/缓存区/index/目录区 的文件添加到�
 列出所有branch
 ### $ git checkout developer1
 切换到developer1 分支
-### $ git branch -d [branch name]  
-删除某一分支
 ### $ git checkout -b [branch name]
-创建新分支并切换到该分支
+创建新分支并切换到该分支  
+### $ git branch -d [branch name]  
+### $ git branch -D [branch name]
+删除某一分支。 -d 和 -D 的区别在于 这个分支上有别的分支上都没有的commit的话，那么删了这个分支就会导致这个独有的commit消失，这是很危险的，d删不掉，D才行。说白了就是一种防止commit消失的一种设计。  
+master是默认保护分支，一般无法删除，所以为了实验方便，需要新建develop分支作为主分支。这样，一波测试完成后，直接git branch -D删除本地branch
+### git push origin :[branch name]  
+删除远程分支
 
 现在除了master分支，还创建了developer1和developer2两个分支，并且每个分支下有一个和分支同名的文件，分别为developer1.markdown和developer2.markdown。现在要尝试把developer1中的文件merge到master中。
 **merge**
