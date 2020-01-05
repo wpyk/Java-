@@ -121,7 +121,26 @@ commit命令时将位于暂存区/缓存区/index/目录区 的文件添加到�
 ## 将创建好的文档push到远端的过程：  
 ### git push origin master  
 上述是最简单的push指令，后续创建了更多分支的时候，就能够将文件push到别的分支去。
+**当在一台新的电脑里下载了远程的仓库并且进行了修改后，想要push回去，会遇到下面的提示：**
+$ git commit -m 'update GitNote'
 
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'wpyk1@DESKTOP-UDMCI1M.(none)')
+
+所以解决方法是当出现这个上述提示后 接着补充
+你在命令行中执行
+git config --global user.email "你的邮箱"
+git config --global user.name "你的名字"
+输入完后再接着执行git commit 和 push
 
 ## branch 与 merge
 **branch**
