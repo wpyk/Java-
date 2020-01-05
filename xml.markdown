@@ -1,0 +1,1 @@
+1. Tomcat在启动时首先会访问xml文件中servlet的地址和mapping。每一个servlet会将一个 Java class和url-pattern对应起来。所以servlet不能重名。
