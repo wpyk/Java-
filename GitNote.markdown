@@ -27,6 +27,17 @@ Git是一个开源的分布式版本管理系统，由Linus通过C语言实现�
 ### git status     查看当前版本状态，是否有更改  
 ![git status.png](https://i.loli.net/2020/01/01/njBOeAvxodpPRY5.png)  
 可以看到这里显示列新添加的文档，这些文档其实是untracked file 
+### git diff  
+当暂存区中没有文件时，git diff比较的是，工作区中的文件与上次提交到版本库中的文件;  
+当暂存区中有文件时，git diff则比较的是，当前工作区中的文件与暂存区中的文件。  
+
+### git diff --staged 只显示在staged area被修改了的文件
+### git diff head     显示所有的本修改了文件。  
+假设新建了文档x，并且add了，通过 git diff --stage能够看到x；  
+若将x 给add之后，修改了本来就有的y文件，再git diff --stage，就只能看到x，无法看到y；  
+如果使用git diff head，就能俩都看到了。
+
+
 ## 增
 接下来我们把它放置到index（缓存区）中：  
 ### git add [file name]  OR  git add .
