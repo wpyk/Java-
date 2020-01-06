@@ -9,9 +9,13 @@ jre 是java运行时环境，包含了java虚拟机，java基础类库。是使�
 下载路径： https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html  
 推荐使用临时邮箱从甲骨文下载内容。
 
-安装：随便找网上安装教程就行，记得自己装在哪里了。   
+安装：随便找网上安装教程就行，记得自己装在哪里了。     
+有一点需要注意的是，安装jdk的时候是先安装了jdk后安装了jre，要注意这两个安装的文件不能再同一个文件夹，即不能把jre安装到jdk文件夹，否则jdk的安装文件会被删除。但是可以在java文件夹下分别创建jdk和jre的文件夹，这样没问题。    
+https://www.jianshu.com/p/f4b4c6177046 这一篇说的挺好的，包括了环境配置。
 https://www.cnblogs.com/cnwutianhao/p/5487758.html   
 环境变量配置： 找网上教程就行了，配多了自己就会了。可以参见maven的环境变量配置。
+
+安装好之后通过： java，javac 和 java -version三个指令检查自己安装的是否成功。
 
 ## 重要的组件
 ### javac编译器
