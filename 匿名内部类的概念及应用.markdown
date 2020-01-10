@@ -7,180 +7,181 @@
 
 若不使用匿名内部类，代码的实现是这样的：
 
-```java
-abstract class Person {
-    public abstract void eat();
-}
- 
-class Child extends Person {
-    public void eat() {
-        System.out.println("eat something");
-    }
-}
- 
-public class Demo {
-    public static void main(String[] args) {
-        Person p = new Child();
-        p.eat();
-    }
-}
-```
+
+	abstract class Person {
+	    public abstract void eat();
+	}
+	 
+	class Child extends Person {
+	    public void eat() {
+	        System.out.println("eat something");
+	    }
+	}
+	 
+	public class Demo {
+	    public static void main(String[] args) {
+	        Person p = new Child();
+	        p.eat();
+	    }
+	}
+
 ## 匿名内部类的实现  
 
 匿名内部类最大的好处就是灵活和简便。对于abstract类的interface类，每一次在使用的时候都需要一个实现了该抽象方法或者接口的方法的具体的对象，再对这个对象进行操作。如果我们能够跳过这个实例化的过程，直接使用，则会增加程序的灵活性。具体代码见下：
 
-```java
-//这是一个abstract类
-abstract class Person {
-    public abstract void eat();
-}
-//这是一个interface类
-interface Eat{
-    public void food();
-}
 
- 
-public class InnerClassPractice {
-    public static void main(String[] args) {
-        com.wangxiaokai.Person p = new com.wangxiaokai.Person() {
-            public void eat() {
-                System.out.println("hungry");
-            }
-        };
-        p.eat();
-        
-        com.wangxiaokai.Eat eat = new com.wangxiaokai.Eat() {
-            public void food() {
-                System.out.println("rice");
-            }
-        };
-        
-        eat.food();
-    }
-}
+	//这是一个abstract类
+	abstract class Person {
+	    public abstract void eat();
+	}
+	//这是一个interface类
+	interface Eat{
+	    public void food();
+	}
+	
+	 
+	public class InnerClassPractice {
+	    public static void main(String[] args) {
+	        com.wangxiaokai.Person p = new com.wangxiaokai.Person() {
+	            public void eat() {
+	                System.out.println("hungry");
+	            }
+	        };
+	        p.eat();
+	        
+	        com.wangxiaokai.Eat eat = new com.wangxiaokai.Eat() {
+	            public void food() {
+	                System.out.println("rice");
+	            }
+	        };
+	        
+	        eat.food();
+	    }
+	}
 
-```
+
 以上代码的运行结果是：  
-```java
-hungry
-rice
-```
+
+	hungry
+	rice
+
 
 ## 下面我们使用leetcode的一道题来对匿名内部类的应用做更深一步的讨论
 首先我们创建一个类Order，其属性有id，price和num分别代表某一个订单的id，购买物品的单价和个数（此处只是简单的考虑每个订单只能买一种商品）。实现代码如下：
 
-```java
-package com.sort;
-
-public class Order extends Object{
-    private int id;
-    private int price;
-    private int num;
-    
-    public int getId() {
-        return id;
-    }
-    
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    public int getPrice() {
-        return price;
-    }
-    
-    public void setPrice(int price) {
-        this.price = price;
-    }
-    
-    public int getNum() {
-        return num;
-    }
-    
-    public void setNum(int num) {
-        this.num = num;
-    }
-    
-    public Order(int id, int price, int num) {
-        this.id = id;
-        this.price = price;
-        this.num = num;
-    }
-    
-    public String toString() {
-        return "id: "+id+" price: "+price+" num: "+num;
-        
-    }
-    
-}
-
-```
+	```java
+	package com.sort;
+	
+	public class Order extends Object{
+	    private int id;
+	    private int price;
+	    private int num;
+	    
+	    public int getId() {
+	        return id;
+	    }
+	    
+	    public void setId(int id) {
+	        this.id = id;
+	    }
+	    
+	    public int getPrice() {
+	        return price;
+	    }
+	    
+	    public void setPrice(int price) {
+	        this.price = price;
+	    }
+	    
+	    public int getNum() {
+	        return num;
+	    }
+	    
+	    public void setNum(int num) {
+	        this.num = num;
+	    }
+	    
+	    public Order(int id, int price, int num) {
+	        this.id = id;
+	        this.price = price;
+	        this.num = num;
+	    }
+	    
+	    public String toString() {
+	        return "id: "+id+" price: "+price+" num: "+num;
+	        
+	    }
+	    
+	}
+	
+	```
 
 下面我们创建一个List<Order>,并针对order元素的id进行升序排序：
 
-```java
-public class SortDemo {
-    public static void main(String[] args) {
-        //首先通过构造方法创建出5个Order对象并将它们存储在list里。
-        Order order1 = new Order(100, 100, 10);
-        Order order2 = new Order(2, 400, 35);
-        Order order3 = new Order(5, 500, 20);
-        Order order4 = new Order(4, 300, 12);
-        Order order5 = new Order(12, 200, 8);
+	
+	public class SortDemo {
+	    public static void main(String[] args) {
+	        //首先通过构造方法创建出5个Order对象并将它们存储在list里。
+	        Order order1 = new Order(100, 100, 10);
+	        Order order2 = new Order(2, 400, 35);
+	        Order order3 = new Order(5, 500, 20);
+	        Order order4 = new Order(4, 300, 12);
+	        Order order5 = new Order(12, 200, 8);
+	
+	        List<Order> list = new ArrayList<>();
+	
+	        list.add(order1);
+	        list.add(order2);
+	        list.add(order3);
+	        list.add(order4);
+	        list.add(order5);
+			/*注意，当print一个list的时候，是对list使用toString方法。在eclipse里寻找*list的父类中有提String方法的类，会一直找到AbstractCollection这个类是有
+	        *toString方法的。其实现的步骤为：
+	        *    public String toString() {
+   			*	 Iterator<E> it = iterator();
+	        *     //如果被遍历的内容为空直接返回一个空的list
+	        *    if (! it.hasNext())
+	        *        return "[]";
+	        *    //新建一个string用于存储结果
+	        *    StringBuilder sb = new StringBuilder();
+	        *    //以一个'['作为输出结果的开始
+	        *    sb.append('[');
+	        *    //等价与while（true），一直执行直到内部出现break或return
+	        *    for (;;) {
+	        *    //从迭代器中依次取出队列中的对象，存到e中
+	        *        E e = it.next();
+	        *    //对于每一个e，若要将其append到sb中，执行的是e.toString方法，在
+	        *我们这个题目中，e是Order，如果其重写了toString方法，则用其新的toString方法，若没有重写过，则执行object的方法。后面的this是防止list将自己存入list，这//种情况几乎不会出现，在这里就是一个防止出现死循环的功能。
+	        *         sb.append(e == this ? "(this Collection)" : e);
+	        *         if (! it.hasNext())
+	        *             return sb.append(']').toString();
+	        *         sb.append(',').append(' ');
+	        *     }
+	        * }
+	
+			*/
+	        
+	        System.out.println(list);
+	        /*
+	         * sort中第一个属性是等待被排序的对象list，第二个参数是一个排序器， 在这个方法里属于匿名内部类。
+	         * 在实现该匿名内部类的时候，要用尖括号指定本次排序对象的类型(也就是泛型)，默认为object。
+	         * 最终排序的结果还放在原来的list里面
+	         */
+	        Collections.sort(list, new Comparator<Order>() {
+	
+	            @Override
+	            public int compare(Order o1, Order o2) {
+	                //这里的返回结果的正负可以指定，并不代表两个参与比较的数字的大小，只是按照题目需要实现的逻辑排出其前后顺序。如果返回值为正，则o1排在o2之前；返回为负，o2在o1之前；若返回值为0， 不改变原有的顺序。若最终结果与预想相反，在这里修改返回值记课调转顺序。
+	                if(o1.getId() < o2.getId()) {
+	                    return -1;
+	                }else if(o1.getId() > o2.getId()) {
+	                    return 1;
+	                }else {
+	                    return 0;
+	                }
+	                
+	            }});
+	        System.out.println(list);
+	    }
+	}
 
-        List<Order> list = new ArrayList<>();
-
-        list.add(order1);
-        list.add(order2);
-        list.add(order3);
-        list.add(order4);
-        list.add(order5);
-        //注意，当print一个list的时候，是对list使用toString方法。在eclipse里寻找list//的父类中有提String方法的类，会一直找到AbstractCollection这个类是有
-        //toString方法的。其实现的步骤为：
-        //     public String toString() {
-        //     Iterator<E> it = iterator();
-        //     //如果被遍历的内容为空直接返回一个空的list
-        //     if (! it.hasNext())
-        //         return "[]";
-        //     //新建一个string用于存储结果
-        //     StringBuilder sb = new StringBuilder();
-        //     //以一个'['作为输出结果的开始
-        //     sb.append('[');
-        //     //等价与while（true），一直执行直到内部出现break或return
-        //     for (;;) {
-        //         //从迭代器中依次取出队列中的对象，存到e中
-        //         E e = it.next();
-        //         //对于每一个e，若要将其append到sb中，执行的是e.toString方法，在
-        //我们这个题目中，e是Order，如果其重写了toString方法，则用其新的toString方法//，若没有重写过，则执行object的方法。后面的this是防止list将自己存入list，这//种情况几乎不会出现，在这里就是一个防止出现死循环的功能。
-        //         sb.append(e == this ? "(this Collection)" : e);
-        //         if (! it.hasNext())
-        //             return sb.append(']').toString();
-        //         sb.append(',').append(' ');
-        //     }
-        // }
-
-        System.out.println(list);
-        /*
-         * sort中第一个属性是等待被排序的对象list，第二个参数是一个排序器， 在这个方法里属于匿名内部类。
-         * 在实现该匿名内部类的时候，要用尖括号指定本次排序对象的类型(也就是泛型)，默认为object。
-         * 最终排序的结果还放在原来的list里面
-         */
-        Collections.sort(list, new Comparator<Order>() {
-
-            @Override
-            public int compare(Order o1, Order o2) {
-                //这里的返回结果的正负可以指定，并不代表两个参与比较的数字的大小，只是按照题目需要实现的逻辑排出其前后顺序。如果返回值为正，则o1排在o2之前；返回为负，o2在o1之前；若返回值为0， 不改变原有的顺序。若最终结果与预想相反，在这里修改返回值记课调转顺序。
-                if(o1.getId() < o2.getId()) {
-                    return -1;
-                }else if(o1.getId() > o2.getId()) {
-                    return 1;
-                }else {
-                    return 0;
-                }
-                
-            }});
-        System.out.println(list);
-    }
-}
-
-```
