@@ -148,6 +148,9 @@ build tag 里加上：
 
 *如果想修改maven的默认源路径，例如，想要将<sourceDirectory>src</sourceDirectory>修改为<sourceDirectory>src/main</sourceDirectory>*，可以自己手动先在src下面建一个main文件夹，再去mvn clean eclipse:clean eclipse:eclipse。不然可能会遇到右击src无法创建package的情况。其原因在于创建的项目里缺少一些文件，eclipse不完整，经过上述三个命令，会使需要的配置文件齐全。每个项目都是自己的文件夹，即使在别的项目里文件齐全，也无法给当前的项目使用。
 
+*mvn clean :This command deletes target directory and then builds all you code and installs artifacts into local repository.*  
+*eclipse:clean eclipse:eclipse : First, it deletes previously generated Eclipse files (like .project and .classpath and .settings) and then generates new ones, thus, effectively updating them. It may be useful if you introduced some changes in pom.xml (like new dependencies or plugins) and want Eclipse to be aware of them.*
+
 ## 1.2使程序跑起来
 
 **现在我们要使用之前建立好的框架，创建一个能够跑的起来的工程**
@@ -293,10 +296,12 @@ build tag 里加上：
 ## 2.2 application.properties 文件
 **Spring Boot使用了一个全局的配置文件application.properties，放在src/main/resources目录下或者类路径的/config下。Sping Boot的全局配置文件的作用是对一些默认配置的配置值进行修改。**
 
+*有时候配置的jdbc没问题也会报错，这个时候试一下在最后增加 “&serverTimezone=UTC”*
+
 
 
     //jdbc.ds是和DataSourceConfiguration中的@ConfigurationProperties(prefix = "jdbc.ds")是保持一致的。
-	jdbc.ds.jdbc-url=jdbc:mysql://localhost/ssm_blog?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+	jdbc.ds.jdbc-url=jdbc:mysql://localhost/ssm_wpyk?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
 	jdbc.ds.username=root
 	jdbc.ds.password=asdfg12345
 	jdbc.ds.driver-class-name=com.mysql.jdbc.Driver
