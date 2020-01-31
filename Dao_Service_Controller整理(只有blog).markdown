@@ -5,14 +5,15 @@
 在wpyk.blog下面创建entity文件夹，其本质和bean是一样的，用那种都行。  
 **注意1** 一般任何一个entity，都留一个无参的构造器，这样框架想要new一个这样的对象的时候不会抱错。不然容易发生空指针错误。  
 **注意2**对于web架构中的对象，在view，controller端有可能不能以不变的形式出现，即从浏览器获取数据的bean和通过controller实现的bean，虽然都是为了传递一定的参数，但是其属性名称可能无法一一对应，并且在实际项目监理过程中也不能一一对应。这时就要简历这些bean之间的构造器，如下面的代码中的注意2，就通过BlogView构建出了blog.  
-```java
-package wpyk.blog.entity;
 
-import java.util.Date;
 
-import wpyk.blog.entity.vo.BlogView;
-
-public class Blog {
+	package wpyk.blog.entity;
+	
+	import java.util.Date;
+	
+	import wpyk.blog.entity.vo.BlogView;
+	
+	public class Blog {
     private int id;
 
     private String title;
