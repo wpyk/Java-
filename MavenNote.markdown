@@ -35,4 +35,4 @@ SCMs
 
 注意：  
 1. 创建项目的时候，项目结构要按照maven约定的格式来，这样Maven才能更好的管理项目。
-2. 
+2. mvn dependency:sources 下载依赖包的源码，
